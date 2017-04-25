@@ -136,9 +136,9 @@ class Kijiji(CrawlSpider):
         # otherwise this is a new item
         self.new_items += 1
         appartement["url"] = response.url
-        appartement["address"] = self._extract_field(response, "Address")
+        appartement["address"] = self._extract_address(response)
         appartement["geocode"] = self.geocode(appartement["address"])
-        appartement["price"] = self._extract_field(response, "Price")
+        appartement["price"] = self._extract_price(response)
         appartement["title"] = self._extract_title(response)
 
         # no geocode found
@@ -216,12 +216,15 @@ class Kijiji(CrawlSpider):
         l = " ".join(response.xpath("//h1/text()").extract())
         return l.strip() if l else None
 
-    def _extract_field(self, response, fieldname):
-        """Retrieve the html field based on xpath"""
-        l = response.xpath("//th[contains(text(), '{0}')]/following::td[1]//./text()".
-                           format(fieldname)).extract()
+    def _extract_address(self, response):
+        """Retrieve the address based on xpath"""
+        l = response.xpath("//th[contains(text(), 'Address')]/following::td[1]//./text()").extract()
         return l[0].strip() if l else None
 
+    def _extract_price(self, response):
+        """Retrieve the price based on xpath"""
+        l = response.xpath("//*[@itemprop='price']//text()").extract()
+        return l[0].strip() if l else None
 
 # Entry point
 process = CrawlerProcess({
