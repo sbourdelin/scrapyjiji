@@ -1,7 +1,7 @@
 # scrapyjiji
 Scrape and localise kijiji ads out of a map.
 
-![map](https://camo.githubusercontent.com/50f57024108c3990489cc0ae842ae55103c5b90f/68747470733a2f2f646c2e64726f70626f7875736572636f6e74656e742e636f6d2f752f333039373231302f6d61705f71632e706e67)
+![map](https://raw.githubusercontent.com/sbourdelin/scrapyjiji/master/map.png)
 
 This tool has been inspired by the scrapy crawler [kijiji_scraper](https://github.com/mfournierca/kijiji_scraper).
 It is not intended to be generic but can be easily adapted to fit your needs.
